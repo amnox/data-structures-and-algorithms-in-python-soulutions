@@ -1,5 +1,5 @@
 import operator
-def cal(list, prev = 0, maxi = 0,shit_list=[]):
+def cal(list, prev = 0, maxi = 0,sh_list=[]):
     list = sorted(list)
 
     for num in list:
@@ -12,7 +12,7 @@ def cal(list, prev = 0, maxi = 0,shit_list=[]):
         new_list = [n for n in new_list if n not in numminus]
         cal(new_list, prev+picked,  max(maxi,prev+picked))
         maxi = max(maxi, prev + picked)
-        shit_list.append(maxi)
-    return shit_list
+        sh_list.append(maxi)
+    return sh_list
 
 print(cal([1,6,3,3,8,4,8,10,1,3]))
