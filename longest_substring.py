@@ -8,8 +8,19 @@ class Solution:
         """
         if s=='':
             return 0
-        if (len(s) == 4):
-            return 3
+        if (False):
+            window = ''
+            for i,c in enumerate(s):
+                print(i,window,c)
+                if i==0:
+                    window=c
+                    continue
+                elif c in window:
+                    if window.index(c)==0:
+                        window = window[1:]+c
+                else:
+                    window+=c
+            return len("".join(set(window)))
         seq=''
         experiment = []
         str_len = len(s)
@@ -20,9 +31,9 @@ class Solution:
                 str_len = str_len - 1
                 experiment.append(str_len)
             else:
+                str_len = str_len + 1
                 experiment.append(str_len)
-        print(experiment)
         maxim = max(collections.Counter(experiment).items(), key=lambda k: k[1])
-
+        print (experiment)
         return maxim[1]
-print(Solution().lengthOfLongestSubstring("dvdf"))
+print(Solution().lengthOfLongestSubstring("dvdkv"))
