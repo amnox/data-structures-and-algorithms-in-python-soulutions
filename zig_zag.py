@@ -42,7 +42,6 @@ class Solution:
         for i in range(0,len(columns[0])):
 
             for j in columns:
-                print(i,j,len(columns))
                 if i>len(j)-1:
                     continue
                 if j[i] == 0:
