@@ -19,17 +19,28 @@ class Solution:
                 return i
             return find_len(node.next, i+1)
 
-        def pop_ops(current_pos, popy, node):
-            if current_pos == popy:
-                if node.next.next is None:
-                    node.next = None
-                else:
-                    node.next = node.next.next
-                    return
-            pop_ops(current_pos+1, popy, node.next)
+        def pop_ops(current_pos, popy, node, prev_node):
 
-        pop_at = find_len(head) - n
-        pop_ops(1, pop_at, head)
+            if node.next is None:
+                prev_node.next=None
+                return
+            if current_pos == popy:
+                if prev_node is None:
+                    node = None
+                    return
+                else:
+                    print('else',current_pos, popy)
+                    prev_node.next = node.next
+                    return
+            pop_ops(current_pos+1, popy, node.next, node)
+
+
+
+        pop_at = find_len(head) - n + 1
+        if(pop_at==1):
+            head = head.next
+            return head
+        pop_ops(1, pop_at, head, None)
         return head
 
 
@@ -52,6 +63,6 @@ def print_list(node):
 
 
 node = ListNode(0)
-create_list(node, ListNode(0), 0, [1, 2, 3, 4, 5])
+create_list(node, ListNode(0), 0, [1, 2])
 Solution().removeNthFromEnd(node, 2)
 print_list(node)
