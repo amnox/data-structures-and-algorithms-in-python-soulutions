@@ -69,7 +69,7 @@ def printTree(node):
     printTree(node.left)
     printTree(node.right)
 
-printTree(ass)
+#printTree(ass)
 def trace_node(target, node, parents=[]):
 
     if node is not None:
@@ -87,6 +87,20 @@ def trace_node(target, node, parents=[]):
             trace_node(target, node.left, parents)
             trace_node(target, node.right, parents)
 
+def trace_node2(target, node):
+    res = []
+    stack = [node,]
+    while True:
+        try:
+            current = stack.pop(0)
+        except:
+            break
+        if current is None:
+            continue
+        if current.val is None:
+            continue
+        print(current.val)
+        stack.append(current.left)
+        stack.append(current.right)
 
-
-trace_node(8,ass)
+trace_node2(0, ass)
