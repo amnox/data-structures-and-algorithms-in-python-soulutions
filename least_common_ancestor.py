@@ -26,6 +26,9 @@ BACKTRACK 10 --> 5
 BACKTRACK 11 --> 5 --> 2
 
 2 is the node where we have left = True and right = True and hence it is the lowest common ancestor.
+
+Approach 2:
+BFS
 '''
 # Definition for a binary tree node.
 class TreeNode:
