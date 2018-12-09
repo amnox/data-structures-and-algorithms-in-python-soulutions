@@ -90,17 +90,23 @@ def trace_node(target, node, parents=[]):
 def trace_node2(target, node):
     res = []
     stack = [node,]
+    level = 0
     while True:
         try:
             current = stack.pop(0)
         except:
             break
         if current is None:
+            level -= 1
             continue
         if current.val is None:
+
             continue
-        print(current.val)
-        stack.append(current.left)
-        stack.append(current.right)
+
+        print(current.val, level)
+        level += 1
+        stack.insert(0, current.right)
+        stack.insert(0,current.left)
+
 
 trace_node2(0, ass)
