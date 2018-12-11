@@ -38,72 +38,23 @@ class TreeNode:
         self.right = None
 
 class Solution:
+
+    def __init__(self):
+        self.ans = None
+
     def lowestCommonAncestor(self, root, p, q):
-        """
-        :type root: TreeNode
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: TreeNode
-        """
+        def recurse_tree(current_node):
 
+            if not current_node:
+                return False
+            left = recurse_tree(current_node.left)
+            right = recurse_tree(current_node.right)
 
-def create_tree(arr=[]):
-    bauss_node = TreeNode(arr.pop(0))
-    next_up = []
-    next_up.append(bauss_node)
-    while len(arr) >= 1:
-        a = next_up.pop(0)
-        b = TreeNode(arr.pop(0))
-        c = TreeNode(arr.pop(0))
-        a.left = b
-        a.right = c
-        next_up.append(b)
-        next_up.append(c)
-    return bauss_node
+            mid = current_node == p or current_node == q
 
-ass = create_tree([3,5,1,6,2,0,8,None,None,7,4])
-def printTree(node):
-    if node==None:
-        return
-    print(node.val)
-    printTree(node.left)
-    printTree(node.right)
+            if mid + left + right >= 2:
+                self.ans = current_node
 
-#printTree(ass)
-def trace_node(target, node, parents=[]):
-
-    if node is not None:
-        if target == node.val:
-            print(node.val, parents)
-            return
-        if node.val is not None:
-            print(node.val, parents)
-            if node.left is not None and node.right is not None:
-                if node.left.val is None and node.right.val is None:
-                    print("fukk",node.val)
-                else:
-                    parents.append(node.val)
-
-            trace_node(target, node.left, parents)
-            trace_node(target, node.right, parents)
-
-def trace_node2(target, node):
-    res = []
-    stack = [node,]
-    while True:
-        try:
-            print(set(map(lambda x: x.val,stack)))
-            current = stack.pop(0)
-        except:
-            break
-        if current is None:
-            continue
-        if current.val is None:
-            continue
-
-        #print(current.val, current.left,current.right)
-        stack.insert(0, current.right)
-        stack.insert(0,current.left)
-
-
-trace_node2(0, ass)
+            return mid or left or right
+        recurse_tree(root)
+        return self.ans
