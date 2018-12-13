@@ -1,4 +1,6 @@
-from itertools import permutations
+from itertools import combinations
+
+
 class Solution:
     def generateParenthesis(self, n):
         """
@@ -7,11 +9,12 @@ class Solution:
         """
         OPEN = '('
         CLOSE = ')'
+
         def check_valid(strr):
             queye = [strr.pop(0)]
             if queye[0] == CLOSE:
                 return False
-            while len(strr)>0:
+            while len(strr) > 0:
                 if len(queye) == 0:
                     queye.append(strr.pop())
                 curr = strr.pop(0)
@@ -23,7 +26,7 @@ class Solution:
             return len(queye) == 0
 
         smash_str = []
-        for i in range(0,n):
+        for i in range(0, n):
             smash_str.append(OPEN)
             smash_str.append(CLOSE)
 
@@ -32,13 +35,12 @@ class Solution:
             liss = []
             for n in range(base ** base):
                 yield [s[n // base ** (base - d - 1) % base] for d in range(base)]
+
         sauce = []
-        for p in permutations_with_repetition(smash_str):
-            if p[0]==CLOSE:
-                continue
-            elif check_valid(p):
-                sauce.append(''.join(p))
+        perr = [list(s) for s in combinations(''.join(smash_str), len(smash_str))]
+        print(combinations(smash_str,2))
+        for p in perr:
+            print(p)
 
-
-
+        return sauce
 Solution().generateParenthesis(5)
