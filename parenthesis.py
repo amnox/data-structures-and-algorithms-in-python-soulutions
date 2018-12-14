@@ -1,4 +1,6 @@
-from itertools import permutations
+from itertools import combinations
+
+
 class Solution:
     def generateParenthesis(self, n):
         """
@@ -7,25 +9,22 @@ class Solution:
         """
         OPEN = '('
         CLOSE = ')'
+
         def check_valid(strr):
-            queye = [strr.pop(0)]
-            if queye[0] == CLOSE:
-                return False
-            while len(strr)>0:
-
-                if len(queye) == 0:
-                    queye.append(strr.pop())
-                curr = strr.pop(0)
-                print(strr,queye,curr,curr == queye[0])
-                if curr == queye[0]:
-                    queye.append(curr)
+            pop_art = []
+            for s in strr:
+                if len(pop_art) == 0:
+                    pop_art.append(s)
+                    continue
+                if pop_art[-1] == OPEN and s == CLOSE:
+                    pop_art.pop()
+                    continue
                 else:
-                    queye.pop()
-
-            return len(queye) == 0
+                    pop_art.append(s)
+            return len(pop_art) == 0
 
         smash_str = []
-        for i in range(0,n):
+        for i in range(0, n):
             smash_str.append(OPEN)
             smash_str.append(CLOSE)
         def permutations_with_repetition(s):
@@ -33,6 +32,7 @@ class Solution:
             liss = []
             for n in range(base ** base):
                 yield [s[n // base ** (base - d - 1) % base] for d in range(base)]
+
         sauce = []
 
 
@@ -63,6 +63,9 @@ class Solution:
 
 
         a = list(list(x) for x in perm_unique(smash_str) if x[0]!=')')
-        print(check_valid(['(', ')', ')', ')', '(', '(']))
-
+        return([x for x in a if check_valid(x)])
 Solution().generateParenthesis(3)
+
+
+
+
