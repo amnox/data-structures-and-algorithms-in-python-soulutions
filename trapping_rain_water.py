@@ -9,4 +9,5 @@ class Solution:
         :type height: List[int]
         :rtype: int
         """
+        original = height
         reverse = height.reverse()
