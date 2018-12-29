@@ -9,5 +9,10 @@ class Solution:
         :type height: List[int]
         :rtype: int
         """
-        original = height
-        reverse = height.reverse()
+        original = [x for x in height]
+        height.reverse()
+        reverse = height
+        print(original, reverse)
+
+
+Solution().trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])
